@@ -1,17 +1,67 @@
 #!/usr/bin/env bash
+#
+# starship-claude - Use Starship for your Claude Code status line
+#
+# This script parses the claude code status line data to provide
+# environment variables you can use in a standard Starship prompt.
+#
+# - `CLAUDE_MODEL` - Current model (haiku/sonnet/opus)
+# - `CLAUDE_CONTEXT` - Context window usage percentage
+# - `CLAUDE_COST` - Session cost
+# - Prints OSC 9;4 ConEmu terminal progress bar for context usage (optional)
+#
+# Repository: https://github.com/martinemde/starship-claude
+#
+# Usage:
+#   Add to ~/.claude/settings.json:
+#   {
+#     "statusLine": {
+#       "type": "command",
+#       "command": "~/.local/bin/starship-claude"
+#     }
+#   }
+#
+# Options can be added to the above command:
+#   --config PATH      Use custom Starship config file location
+#   --no-progress      Disable terminal context progress bar
+#
+# MIT License
+# Copyright (c) 2026 Martin Emde
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
 set -o errexit -o nounset -o pipefail
 
 # Configuration: context window progress thresholds
-PROGRESS_COMPACT=80 # Percentage at which Claude compacts context
+PROGRESS_COMPACT=80 # Percentage at which Claude Code compacts context
 PROGRESS_YELLOW=50  # Warning threshold for progress bar
 PROGRESS_RED=65     # Error threshold for progress bar
 
 # Configuration: model display names
+# NerdFont icons used below which may not render (esp not on GitHub)
 HAIKU=" haiku"
 SONNET="󰚩 sonnet"
 OPUS="󱚦 opus"
 
 # Configuration: random star characters for prompt decoration
+# This can help visually differentiate from other prompts.
+# FYI: Official UI guidelines indicate #D97757 as Claude Orange
 STARS=("" "✴" "✶" "❇" "✳" "❋" "*" "✦" "✧" "✸" "✷" "✶" "✴" "✳" "✲" "✱" "❉" "❈" "❇")
 # Export a random star character that changes each prompt
 export CLAUDE_STAR="${STARS[$RANDOM % ${#STARS[@]}]}"
