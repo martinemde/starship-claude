@@ -6,6 +6,7 @@
 # environment variables you can use in a standard Starship prompt.
 #
 # - `CLAUDE_MODEL` - Current model (haiku/sonnet/opus)
+# - `CLAUDE_MODEL_NAME` - Model with version (e.g., "opus 4.5")
 # - `CLAUDE_CONTEXT` - Context window usage percentage
 # - `CLAUDE_COST` - Session cost
 # - Prints OSC 9;4 ConEmu terminal progress bar for context usage (optional)
@@ -124,6 +125,19 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
     esac
 
     export CLAUDE_MODEL="$short_model"
+
+    # Extract version number for CLAUDE_MODEL_NAME
+    # Handles display_name format like "Sonnet 4.5"
+    version="$(
+      printf '%s' "$raw_model" |
+        sed -E 's/.*[^0-9]([0-9]+)\.([0-9]+).*/\1.\2/' |
+        grep -E '^[0-9]+\.[0-9]+$' || true
+    )"
+    if [ -n "$version" ]; then
+      export CLAUDE_MODEL_NAME="$short_model $version"
+    else
+      export CLAUDE_MODEL_NAME="$short_model"
+    fi
   fi
 
   #

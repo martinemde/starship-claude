@@ -26,6 +26,7 @@ setup() {
 #!/usr/bin/env bash
 # Print relevant env vars for testing
 printf "CLAUDE_MODEL=%s\n" "${CLAUDE_MODEL:-}"
+printf "CLAUDE_MODEL_NAME=%s\n" "${CLAUDE_MODEL_NAME:-}"
 printf "CLAUDE_COST=%s\n" "${CLAUDE_COST:-}"
 printf "CLAUDE_CONTEXT=%s\n" "${CLAUDE_CONTEXT:-}"
 printf "CLAUDE_SESSION_ID=%s\n" "${CLAUDE_SESSION_ID:-}"
