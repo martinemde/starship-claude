@@ -54,14 +54,20 @@ Run it directly to test it out but you'll need to grab a [test fixture JSON file
 
 Show progress bars for context usage percentages in terminals like Ghostty. (I love it!)
 
+We use [Dex Horthy's "dumb zone" (video)][dumb-zone] to start warning at 40%.
+
 - Progress bar scales for 80% compaction.
-  - 0-50%: Normal - You're good.
-  - 50-65%: Warning - Reset if it's not going well.
-  - 65%+: Error - Compacting soon...
+  - 0-40%: Normal - You're good.
+  - 40-60%: Warning - Reset if it's not going well.
+  - 60%+: Error - Compacting soon...
+
+Warning does not mean stop, but be aware of your context usage.
 
 > [!NOTE]
 > This doesn't work in tmux even if you are using a Ghostty.
 > Let me know if you find a workaround.
+
+[dumb-zone]: https://www.youtube.com/watch?v=rmvDxxNubIg "YouTube: No Vibes Allowed: Solving Hard Problems in Complex Codebases – Dex Horthy, HumanLayer"
 
 ### Customize
 

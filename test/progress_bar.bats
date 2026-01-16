@@ -22,7 +22,7 @@ extract_osc_progress() {
 @test "progress bar can be disabled with --no-progress flag" {
   # Run with --no-progress flag
   local fixture_path="${FIXTURES_DIR}/active_session_with_context.json"
-  output=$(STARSHIP_CMD="${TEST_TEMP_DIR}/print-env" "${BIN_DIR}/starship-claude" --no-progress < "$fixture_path" 2>&1)
+  output=$(STARSHIP_CMD="${TEST_TEMP_DIR}/print-env" "${BIN_DIR}/starship-claude" --no-progress <"$fixture_path" 2>&1)
 
   # Should NOT contain OSC sequence
   ! echo "$output" | grep -q $'\033\]9;4;'

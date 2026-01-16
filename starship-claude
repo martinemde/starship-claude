@@ -49,9 +49,10 @@
 set -o errexit -o nounset -o pipefail
 
 # Configuration: context window progress thresholds
+# I use Dex Horthy's dumb zone at 40% context usage
 PROGRESS_COMPACT=80 # Percentage at which Claude Code compacts context
-PROGRESS_YELLOW=50  # Warning threshold for progress bar
-PROGRESS_RED=65     # Error threshold for progress bar
+PROGRESS_YELLOW=40  # Warning threshold for progress bar
+PROGRESS_RED=60     # Error threshold for progress bar
 
 # Configuration: model display names
 # NerdFont icons used below which may not render (esp not on GitHub)
