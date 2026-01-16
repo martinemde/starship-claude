@@ -1,0 +1,37 @@
+{
+  "name": "starship-claude",
+  "owner": {
+    "name": "Martin Emde",
+    "email": "me@martinemde.com"
+  },
+  "metadata": {
+    "description": "Starship-based statusline configuration for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "starship-claude",
+      "source": "./plugin",
+      "description": "Interactive setup wizard for starship-claude statusline with customizable palettes and styles",
+      "version": "1.0.0",
+      "author": {
+        "name": "Martin Emde",
+        "email": "me@martinemde.com"
+      },
+      "homepage": "https://github.com/martinemde/starship-claude",
+      "repository": "https://github.com/martinemde/starship-claude",
+      "license": "MIT",
+      "keywords": [
+        "starship",
+        "statusline",
+        "prompt",
+        "catppuccin",
+        "gruvbox",
+        "dracula",
+        "nord"
+      ],
+      "category": "statusline",
+      "tags": ["starship", "prompt", "customization"]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+
+# Minimal style - clean and simple
+format = """
+$directory \
+$git_branch$git_status \
+${env_var.CLAUDE_MODEL} \
+${env_var.CLAUDE_CONTEXT} \
+${env_var.CLAUDE_COST}\
+"""
+
+[directory]
+style = "fg:sky"
+format = "[$path]($style)"
+truncation_length = 2
+truncate_to_repo = true
+
+[git_branch]
+symbol = ""
+style = "fg:maroon"
+format = "[$branch]($style)"
+
+[git_status]
+style = "fg:maroon"
+format = "[($all_status$ahead_behind)]($style)"
+
+[env_var.CLAUDE_MODEL]
+variable = "CLAUDE_MODEL"
+format = "[$env_value]($style)"
+style = "fg:sapphire"
+
+[env_var.CLAUDE_CONTEXT]
+variable = "CLAUDE_CONTEXT"
+format = "[$env_value]($style)"
+style = "fg:peach"
+
+[env_var.CLAUDE_COST]
+variable = "CLAUDE_COST"
+format = "[$env_value]($style)"
+style = "fg:green"

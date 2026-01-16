@@ -1,0 +1,34 @@
+palette = 'dracula'
+
+[palettes.dracula]
+# Background colors
+base = "#282a36"
+mantle = "#21222c"
+crust = "#191a21"
+surface0 = "#44475a"
+surface1 = "#4d4f68"
+surface2 = "#565976"
+
+# Foreground colors
+text = "#f8f8f2"
+subtext0 = "#bfbfbf"
+subtext1 = "#e6e6e6"
+overlay0 = "#6272a4"
+overlay1 = "#7480ad"
+overlay2 = "#868eb6"
+
+# Accent colors
+red = "#ff5555"
+maroon = "#ff6e6e"
+green = "#50fa7b"
+yellow = "#f1fa8c"
+blue = "#6272a4"
+sapphire = "#8be9fd"
+sky = "#8be9fd"
+teal = "#8be9fd"
+peach = "#ffb86c"
+mauve = "#bd93f9"
+pink = "#ff79c6"
+lavender = "#bd93f9"
+flamingo = "#ff79c6"
+rosewater = "#f8f8f2"

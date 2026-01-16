@@ -1,0 +1,55 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+
+# Powerline style without Nerd Font icons (text-only)
+format = """
+${env_var.CLAUDE_STAR}\
+$directory | \
+$git_branch\
+$git_status\
+${env_var.CLAUDE_MODEL} | \
+${env_var.CLAUDE_CONTEXT} | \
+${env_var.CLAUDE_COST}\
+$cmd_duration\
+"""
+
+[env_var.CLAUDE_STAR]
+variable = "CLAUDE_STAR"
+format = "[$env_value]($style)"
+style = "bg:base fg:#D97757"
+
+[directory]
+style = "fg:sky"
+format = "[$path]($style)"
+truncation_length = 2
+truncate_to_repo = true
+
+[git_branch]
+symbol = ""
+style = "fg:maroon"
+format = "[$branch]($style)"
+
+[git_status]
+style = "fg:maroon"
+format = "[($all_status$ahead_behind) ]($style)"
+
+[env_var.CLAUDE_MODEL]
+variable = "CLAUDE_MODEL"
+format = "[$env_value]($style)"
+style = "fg:sapphire"
+
+[env_var.CLAUDE_CONTEXT]
+variable = "CLAUDE_CONTEXT"
+format = "[$env_value]($style)"
+style = "fg:peach"
+
+[env_var.CLAUDE_COST]
+variable = "CLAUDE_COST"
+format = "[$env_value]($style)"
+style = "fg:green"
+
+[cmd_duration]
+show_milliseconds = false
+format = "[ $duration](fg:yellow) "
+disabled = false
