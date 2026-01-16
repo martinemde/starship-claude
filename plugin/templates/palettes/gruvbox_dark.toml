@@ -1,0 +1,34 @@
+palette = 'gruvbox_dark'
+
+[palettes.gruvbox_dark]
+# Background colors
+base = "#282828"
+mantle = "#1d2021"
+crust = "#1d2021"
+surface0 = "#3c3836"
+surface1 = "#504945"
+surface2 = "#665c54"
+
+# Foreground colors
+text = "#ebdbb2"
+subtext0 = "#a89984"
+subtext1 = "#bdae93"
+overlay0 = "#7c6f64"
+overlay1 = "#928374"
+overlay2 = "#a89984"
+
+# Accent colors
+red = "#cc241d"
+maroon = "#fb4934"
+green = "#98971a"
+yellow = "#d79921"
+blue = "#458588"
+sapphire = "#83a598"
+sky = "#83a598"
+teal = "#689d6a"
+peach = "#d65d0e"
+mauve = "#b16286"
+pink = "#d3869b"
+lavender = "#d3869b"
+flamingo = "#fb4934"
+rosewater = "#ebdbb2"

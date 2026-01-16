@@ -58,8 +58,8 @@ style = "bg:base fg:#D97757"
 [directory]
 style = "bg:base fg:sky"
 format = "[ $path ]($style)"
-truncation_length = 2
-truncate_to_repo = true
+truncation_length = 1
+truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
