@@ -6,43 +6,47 @@
 
 _Use [Starship](https://starship.rs) for your [`claude` code](https://claude.ai/products/claude-code) status line._
 
-## Overview
+## Quick Start
+
+> [!TIP]
+> Run each of the following commands in `claude` _one at a time_.
+
+```claude
+/plugin marketplace add martinemde/starship-claude
+```
+
+```claude
+/plugin install starship-claude@starship-claude
+```
+
+Then run the setup wizard:
+
+```claude
+/starship-claude:setup
+```
+
+The wizard is just instructions to claude that will help with setup:
+
+1. Check if starship is installed (offers to install if missing)
+2. Detect existing configuration and ask what to do
+3. Ask about Nerd Font support
+4. Let you choose a color palette
+5. Let you choose a prompt style
+6. Install the script and generate your config
+7. Update your Claude Code settings
+8. Verify everything works
+
+## Manual Install
 
 You need [starship installed](https://starship.rs/#quick-install). (that's why you're here right?)
-This also uses [Nerd Fonts](https://www.nerdfonts.com/) for the shapes and the robots.
+We ❤️ [Nerd Fonts](https://www.nerdfonts.com/) for the shapes and the robots. I recommend getting one.
 
 ```bash
 # If you don't already have starship...
 curl -sS https://starship.rs/install.sh | sh
 ```
 
-I know you don't want yet another dependency, that's why this is all contained in a single [bash script](https://github.com/martinemde/starship-claude/blob/main/starship-claude). Just grab it and make it your own. It's a starting point.
-
-## Quick Start with Claude Code Plugin
-
-If you're using Claude Code, install from the plugin marketplace:
-
-```
-/plugin marketplace add martinemde/starship-claude
-/plugin install starship-claude@starship-claude
-```
-
-Then run the interactive setup wizard:
-
-```
-/starship-claude:setup
-```
-
-This interactive wizard will:
-- Check if starship is installed (and offer to install it)
-- Ask about Nerd Font support
-- Let you choose a color palette (Catppuccin, Gruvbox, Dracula, Nord, Solarized)
-- Let you choose a style (Powerline or Minimal)
-- Install everything automatically
-
-## Manual Installation
-
-Here's a simple set of commands to get started:
+Then run these commands in your shell.
 
 ```bash
 # get the script
@@ -63,8 +67,8 @@ Add the statusline in your Claude Code settings (`~/.claude/settings.json`):
   // ... other stuff
   "statusLine": {
     "type": "command",
-    "command": "~/.local/bin/starship-claude"
-  }
+    "command": "~/.local/bin/starship-claude",
+  },
 }
 ```
 

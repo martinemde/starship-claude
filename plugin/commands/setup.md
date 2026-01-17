@@ -15,7 +15,7 @@ allowed-tools:
 
 You are running an interactive setup wizard to configure the starship-claude statusline for Claude Code. Follow these steps in order, using AskUserQuestion for each decision point.
 
-## Step 1: Check Prerequisites
+## Step 1: Check for Starship
 
 Run this command to check if starship is installed:
 
@@ -23,13 +23,28 @@ Run this command to check if starship is installed:
 command -v starship >/dev/null 2>&1 && echo "installed" || echo "not_installed"
 ```
 
-If starship is NOT installed, ask the user:
+### If starship is NOT installed:
 
-- **Question**: "Starship is not installed. Would you like me to install it?"
+Tell the user: "This prompt uses **Starship**, a fast configurable prompt for any shell. You can read more about it at https://starship.rs. We need to install starship to use this prompt."
+
+Then ask:
+
+- **Question**: "Install starship to continue?"
 - **Header**: "Starship"
 - **Options**:
-  - "Install starship now" → Run: `curl -sS https://starship.rs/install.sh | sh`
-  - "I'll install it myself" → Tell them to visit https://starship.rs and exit the wizard
+  - "Install starship" → Run: `curl -sS https://starship.rs/install.sh | sh`
+  - "Exit wizard" → Tell them to visit https://starship.rs when they're ready and exit the wizard
+
+### If starship IS installed:
+
+Tell the user: "Looks like you already have starship installed, great!"
+
+Then ask:
+
+- **Question**: "Ready to configure your Claude statusline?"
+- **Header**: "Ready"
+- **Options**:
+  - "Launch it! 🚀" → Continue to the next step
 
 ## Step 2: Check Existing Configuration
 
