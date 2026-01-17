@@ -19,6 +19,15 @@ load test_helper
   [[ "$model" == *"sonnet"* ]]
 }
 
+@test "extracts model name with version" {
+  output=$(run_with_fixture "active_session_with_context.json")
+  model_name=$(get_env_var "CLAUDE_MODEL_NAME" "$output")
+
+  # Should contain "sonnet" and version "4.5"
+  [[ "$model_name" == *"sonnet"* ]]
+  [[ "$model_name" == *"4.5"* ]]
+}
+
 @test "sets STARSHIP_SHELL to sh" {
   output=$(run_with_fixture "active_session_with_context.json")
   assert_env_equals "STARSHIP_SHELL" "sh" "$output"

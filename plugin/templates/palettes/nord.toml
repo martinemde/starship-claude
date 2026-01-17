@@ -1,0 +1,36 @@
+palette = 'nord'
+
+[palettes.nord]
+# Polar Night (background)
+base = "#2e3440"
+mantle = "#3b4252"
+crust = "#2e3440"
+surface0 = "#3b4252"
+surface1 = "#434c5e"
+surface2 = "#4c566a"
+
+# Snow Storm (foreground)
+text = "#eceff4"
+subtext0 = "#d8dee9"
+subtext1 = "#e5e9f0"
+overlay0 = "#4c566a"
+overlay1 = "#616e88"
+overlay2 = "#7b88a1"
+
+# Frost (cool accents)
+blue = "#5e81ac"
+sapphire = "#88c0d0"
+sky = "#88c0d0"
+teal = "#8fbcbb"
+
+# Aurora (warm accents)
+red = "#bf616a"
+maroon = "#bf616a"
+green = "#a3be8c"
+yellow = "#ebcb8b"
+peach = "#d08770"
+mauve = "#b48ead"
+pink = "#b48ead"
+lavender = "#b48ead"
+flamingo = "#d08770"
+rosewater = "#eceff4"

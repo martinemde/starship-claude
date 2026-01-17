@@ -1,0 +1,34 @@
+palette = 'solarized_dark'
+
+[palettes.solarized_dark]
+# Base colors
+base = "#002b36"
+mantle = "#073642"
+crust = "#002b36"
+surface0 = "#073642"
+surface1 = "#586e75"
+surface2 = "#657b83"
+
+# Content colors
+text = "#839496"
+subtext0 = "#93a1a1"
+subtext1 = "#eee8d5"
+overlay0 = "#586e75"
+overlay1 = "#657b83"
+overlay2 = "#839496"
+
+# Accent colors
+red = "#dc322f"
+maroon = "#cb4b16"
+green = "#859900"
+yellow = "#b58900"
+blue = "#268bd2"
+sapphire = "#2aa198"
+sky = "#2aa198"
+teal = "#2aa198"
+peach = "#cb4b16"
+mauve = "#6c71c4"
+pink = "#d33682"
+lavender = "#6c71c4"
+flamingo = "#d33682"
+rosewater = "#eee8d5"

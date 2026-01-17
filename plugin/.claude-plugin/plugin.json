@@ -1,0 +1,12 @@
+{
+  "name": "starship-claude",
+  "version": "1.0.0",
+  "description": "Interactive setup wizard for starship-claude statusline",
+  "author": {
+    "name": "Martin Emde",
+    "email": "martin@martinemde.com"
+  },
+  "repository": "https://github.com/martinemde/starship-claude",
+  "license": "MIT",
+  "keywords": ["starship", "statusline", "prompt", "setup"]
+}
