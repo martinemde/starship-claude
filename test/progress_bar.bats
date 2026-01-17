@@ -28,7 +28,7 @@ extract_osc_progress() {
   ! echo "$output" | grep -q $'\033\]9;4;'
 }
 
-@test "progress bar shows normal state (1) for low context (< 45%)" {
+@test "progress bar shows normal state (1) for low context (< 40%)" {
   # active_session_with_context has 15% context
   output=$(run_with_fixture "active_session_with_context.json")
 
@@ -38,15 +38,24 @@ extract_osc_progress() {
   [ "$state" = "1" ] # Normal state
 }
 
-@test "progress bar shows warning state (4) for medium context (45-65%)" {
-  # Create a fixture with ~50% context
-  # We'll need to find or create one
-  skip "Need fixture with 45-65% context"
+@test "progress bar shows warning state (4) for medium context (40-60%)" {
+  # context_50_percent.json has 50% context, in warning range
+  output=$(run_with_fixture "context_50_percent.json")
+
+  osc=$(extract_osc_progress "$output")
+  state=$(echo "$osc" | awk '{print $1}')
+
+  [ "$state" = "4" ] # Warning state
 }
 
-@test "progress bar shows error state (2) for high context (> 65%)" {
-  # Create a fixture with > 65% context
-  skip "Need fixture with > 65% context"
+@test "progress bar shows error state (2) for high context (>= 60%)" {
+  # context_65_percent.json has 65% context, in error range
+  output=$(run_with_fixture "context_65_percent.json")
+
+  osc=$(extract_osc_progress "$output")
+  state=$(echo "$osc" | awk '{print $1}')
+
+  [ "$state" = "2" ] # Error state
 }
 
 @test "progress bar scales 0-80% context to 0-100% bar" {
@@ -61,8 +70,15 @@ extract_osc_progress() {
 }
 
 @test "progress bar shows 100% when context >= 80%" {
-  # Need a fixture with >= 80% context
-  skip "Need fixture with >= 80% context"
+  # context_85_percent.json has 85% context, should cap at 100% progress
+  output=$(run_with_fixture "context_85_percent.json")
+
+  osc=$(extract_osc_progress "$output")
+  state=$(echo "$osc" | awk '{print $1}')
+  progress=$(echo "$osc" | awk '{print $2}')
+
+  [ "$state" = "2" ]    # Error state (red)
+  [ "$progress" = "100" ] # Capped at 100%
 }
 
 @test "progress bar clears (0;0) when current_usage is null" {
