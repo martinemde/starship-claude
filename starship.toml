@@ -2,92 +2,41 @@
 
 add_newline = false
 
-# dir | (jj) | model | cost
+# Minimal style - clean and simple
 format = """
-[](base)\
-${env_var.CLAUDE_STAR}\
-$directory\
-[](fg:surface0 bg:base)\
-$git_branch\
-$git_status\
-[](bg:base fg:surface0)\
-${env_var.CLAUDE_MODEL}\
-[](bg:base fg:surface0)\
-${env_var.CLAUDE_CONTEXT}\
-[](bg:surface0 fg:surface1)\
+$directory \
+$git_branch$git_status \
+${env_var.CLAUDE_MODEL} \
+${env_var.CLAUDE_CONTEXT} \
 ${env_var.CLAUDE_COST}\
-[](fg:surface1)\
-$cmd_duration\
 """
 
-palette = 'catppuccin_mocha'
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
-
-[env_var.CLAUDE_STAR]
-variable = "CLAUDE_STAR"
-format = "[$env_value]($style)"
-style = "bg:base fg:#D97757"
-
 [directory]
-style = "bg:base fg:sky"
-format = "[ $path ]($style)"
+style = "fg:sky"
+format = "[$path]($style)"
 truncation_length = 2
 truncate_to_repo = true
 
 [git_branch]
 symbol = ""
-style = "bg:surface0 fg:maroon"
-format = "[$symbol $branch]($style)"
+style = "fg:maroon"
+format = "[$branch]($style)"
 
 [git_status]
-style = "bg:surface0 fg:maroon"
+style = "fg:maroon"
 format = "[($all_status$ahead_behind)]($style)"
 
 [env_var.CLAUDE_MODEL]
 variable = "CLAUDE_MODEL"
-format = "[ $env_value ]($style)"
-style = "bg:base fg:sapphire"
+format = "[$env_value]($style)"
+style = "fg:sapphire"
 
 [env_var.CLAUDE_CONTEXT]
 variable = "CLAUDE_CONTEXT"
-format = "[$env_value ]($style)"
-style = "bg:surface0 fg:peach"
+format = "[$env_value]($style)"
+style = "fg:peach"
 
 [env_var.CLAUDE_COST]
 variable = "CLAUDE_COST"
 format = "[$env_value]($style)"
-style = "bg:surface1 fg:green"
-
-[cmd_duration]
-show_milliseconds = false
-format = "[ $duration](fg:yellow) "
-disabled = false
-show_notifications = true
-min_time_to_notify = 45000
+style = "fg:green"

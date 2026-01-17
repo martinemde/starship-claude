@@ -20,18 +20,19 @@ Claude Code statusline.
 ## Installation
 
 > [!TIP]
-> Run the following commands in `claude` to configure your statusline.
+> Run each of the following commands in `claude` _one at a time_.
 
 ```claude
 /plugin marketplace add martinemde/starship-claude
+```
+
+```claude
 /plugin install starship-claude@starship-claude
 ```
 
-## Usage
+Then run the setup wizard:
 
-Run the setup wizard:
-
-```
+```claude
 /starship-claude:setup
 ```
 
@@ -56,8 +57,8 @@ After setup completes, you'll have:
 
 ## Reconfiguring
 
-To change your palette, style, or other options, run the setup wizard again:
+To change your palette, style, or other options, re-run the setup wizard:
 
-```
+```claude
 /starship-claude:setup
 ```
