@@ -92,7 +92,7 @@ We use [Dex Horthy's "dumb zone" (video)][dumb-zone] to start warning at 40%.
 Warning does not mean stop, but be aware of your context usage.
 
 > [!NOTE]
-> This doesn't work in tmux even if you are using a Ghostty.
+> This doesn't work in tmux even if you are using Ghostty.
 > Let me know if you find a workaround.
 
 [dumb-zone]: https://www.youtube.com/watch?v=rmvDxxNubIg "YouTube: No Vibes Allowed: Solving Hard Problems in Complex Codebases – Dex Horthy, HumanLayer"

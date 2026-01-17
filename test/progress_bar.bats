@@ -104,11 +104,11 @@ extract_osc_progress() {
 }
 
 @test "40% context shows warning state" {
-  # 40% is less than 45%, so should be normal (state 1)
+  # 40% is at the warning threshold (>= 40%), so should be warning (state 4)
   output=$(run_with_fixture "context_40_percent.json")
 
   osc=$(extract_osc_progress "$output")
   state=$(echo "$osc" | awk '{print $1}')
 
-  [ "$state" = "1" ] # Normal state (40 < 45)
+  [ "$state" = "4" ] # Warning state (40 >= 40)
 }
