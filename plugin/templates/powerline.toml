@@ -1,0 +1,60 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = "custom"
+add_newline = false
+
+## LLMs: Avoid changing the format! You can't reliably write nerd fonts and special characters.
+format = """
+[░▒▓](claude_bg)\
+${env_var.CLAUDE_STAR}\
+[](bg:directory_bg fg:claude_bg)\
+$directory\
+[](fg:directory_bg bg:git_bg)\
+$git_branch\
+$git_status\
+[](fg:git_bg bg:model_bg)\
+${env_var.CLAUDE_MODEL_NERD}\
+[](fg:model_bg bg:context_bg)\
+${env_var.CLAUDE_CONTEXT}\
+[](fg:context_bg bg:cost_bg)\
+${env_var.CLAUDE_COST}\
+[ ](fg:cost_bg)\
+"""
+
+[env_var.CLAUDE_STAR]
+variable = "CLAUDE_STAR"
+format = "[ $env_value ]($style)"
+style = "bg:claude_bg fg:claude"
+
+[directory]
+style = "bg:directory_bg fg:directory"
+format = "[ $path ]($style)"
+truncation_length = 2
+truncate_to_repo = true
+
+[git_branch]
+symbol = ""
+style = "bg:git_bg fg:git_branch"
+format = "[ $symbol $branch]($style)"
+
+[git_status]
+style = "bg:git_bg fg:git_status"
+format = "[($all_status$ahead_behind)]($style)"
+
+[env_var.CLAUDE_MODEL_NERD]
+variable = "CLAUDE_MODEL_NERD"
+format = "[ $env_value]($style)"
+style = "bg:model_bg fg:model"
+
+[env_var.CLAUDE_CONTEXT]
+variable = "CLAUDE_CONTEXT"
+format = "[ $env_value]($style)"
+style = "bg:context_bg fg:context"
+
+[env_var.CLAUDE_COST]
+variable = "CLAUDE_COST"
+format = "[$env_value]($style)"
+style = "bg:cost_bg fg:cost"
+
+## Custom palette
+#

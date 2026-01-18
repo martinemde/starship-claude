@@ -1,0 +1,22 @@
+# Catppuccin Mocha
+[palettes.custom]
+
+# Semantic colors for templates
+claude = "#D97757"
+claude_bg = "#313244"
+
+directory = "#89dceb"
+directory_bg = "#1e1e2e"
+
+git_branch = "#eba0ac"
+git_status = "#f2cdcd"
+git_bg = "#313244"
+
+model = "#74c7ec"
+model_bg = "#1e1e2e"
+
+context = "#fab387"
+context_bg = "#313244"
+
+cost = "#a6e3a1"
+cost_bg = "#45475a"

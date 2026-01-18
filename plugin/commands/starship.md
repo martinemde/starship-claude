@@ -24,14 +24,31 @@ command -v starship >/dev/null 2>&1 && echo "installed" || echo "not_installed"
 
 ### If starship is NOT installed:
 
-Tell the user: "This prompt uses **Starship**, a fast configurable prompt for any shell. You can read more about it at https://starship.rs. We need to install starship to use this prompt."
+Display this start message:
+
+````markdown
+Welcome to starship-claude setup! 🚀
+
+With Claude's help, this will guide you through configuring a statusline to display useful information: project, context usage, model, and git status, right below your prompt.
+
+Why Starship? Starship is a powerful and configurable prompt for shells like bash, zsh, and fish. I created starship-claude because I wanted the same thing in claude. Starship-claude doesn't have one built in style, you're free to create your own style to match your preferences.
+
+You can read more about Starship here: https://starship.rs
+
+Before we continue, starship-claude requires **Starship** (no surprise there). We need to install to continue. If you don't want to use Homebrew, you'll need to install yourself:
+
+```bash
+curl -sS https://starship.rs/install.sh | sh
+```
+````
 
 Then ask:
 
-- **Question**: "Install starship to continue?"
+- **Question**: "Install starship?"
 - **Header**: "Starship"
 - **Options**:
-  - "Install starship" → Run: `curl -sS https://starship.rs/install.sh | sh`
+  - "brew install starship" → Run: `brew install starship`
+  - "I installed it myself" → Start over from Step 1 and re-check starship
   - "Exit wizard" → Tell them to visit <https://starship.rs> when they're ready and exit the wizard
 
 ### If starship IS installed
@@ -91,8 +108,8 @@ Then ask:
 Show both style options side by side:
 
 > [!Important]
-> You MUST run this command.
-> You are unable to properly output nerd fonts. Trust that it will work.
+> You can't display nerd fonts properly.
+> You MUST run the command below to preview styles.
 
 ```bash
 ${CLAUDE_PLUGIN_ROOT}/bin/configure.sh --nerdfont --compare-styles
@@ -105,6 +122,7 @@ Then ask:
 - **Options**:
   - "Minimal" → Set `chosen_style=minimal`
   - "Bubbles" → Set `chosen_style=bubbles`
+  - "Powerline" → Set `chosen_style=powerline`
 
 ## Step 5: Color Palette Selection
 
@@ -122,34 +140,30 @@ ${CLAUDE_PLUGIN_ROOT}/bin/configure.sh --nerdfont --style ${chosen_style} --all-
 ${CLAUDE_PLUGIN_ROOT}/bin/configure.sh --all-palettes
 ```
 
-Then ask:
+Then ask (you will need to split this into multiple questions if the interface doesn't support long lists):
 
 - **Question**: "Which color palette do you like? (press ctrl+o to see)"
 - **Header**: "Palette"
 - **Options**:
   - "Catppuccin Mocha" → `chosen_palette=catppuccin_mocha`
   - "Catppuccin Frappe" → `chosen_palette=catppuccin_frappe`
-  - "Dracula" → `chosen_palette=dracula`
-  - "Gruvbox Dark" → `chosen_palette=gruvbox_dark`
+  - "Tokyo Night" → `chosen_palette=tokyonight`
   - "Nord" → `chosen_palette=nord`
-  - "Solarized Dark" → `chosen_palette=solarized_dark`
+  - "Custom" -> Ask the user to describe or paste the color palette they want.
+
+The user may ask for a different palette. That's ok, just `--write` without a color, then edit `~/.claude/starship.toml` with the custom colors.
 
 ## Step 6: Install Files
 
-### 6a. Create directories
+### 6a. Install starship-claude binary
 
 ```bash
-mkdir -p ~/.local/bin ~/.claude
+mkdir -p ~/.local/bin ~/.claude && \
+  cp ${CLAUDE_PLUGIN_ROOT}/bin/starship-claude ~/.local/bin/starship-claude && \
+  chmod +x ~/.local/bin/starship-claude
 ```
 
-### 6b. Copy the starship-claude script
-
-```bash
-cp ${CLAUDE_PLUGIN_ROOT}/bin/starship-claude \
-~/.local/bin/starship-claude && chmod +x ~/.local/bin/starship-claude
-```
-
-### 6c. Generate starship.toml
+### 6b. Generate starship.toml
 
 Generate the configuration file using configure.sh based on the user's choices:
 
@@ -167,7 +181,7 @@ ${CLAUDE_PLUGIN_ROOT}/bin/configure.sh --palette ${chosen_palette} --write
 
 This will create `~/.claude/starship.toml` with the appropriate template and palette.
 
-### 6d. Update settings.json
+### 6c. Update settings.json
 
 Read `~/.claude/settings.json` if it exists. Add or update the statusLine configuration:
 
@@ -181,15 +195,45 @@ Read `~/.claude/settings.json` if it exists. Add or update the statusLine config
 }
 ```
 
-If the file doesn't exist, create it with just the statusLine configuration.
+If the file doesn't exist, create it with just this configuration.
 If it exists, preserve all other settings and only add/update the statusLine key.
+
+### 6d. Optionally Update ~/.claude/starship.toml
+
+If the user asked for a custom palette, read `~/.claude/starship.toml`, then substitute only the `[palettes.custom]` section at the end, replacing in with the user's custom colors.
+
+```toml
+# Example custom palette section
+[palettes.custom]
+
+claude = "#D97757" # This is Claude Code's brand color
+claude_bg = "#313244"
+
+directory = "#89dceb"
+directory_bg = "#1e1e2e"
+
+git_branch = "#eba0ac"
+git_status = "#f2cdcd"
+git_bg = "#313244"
+
+model = "#74c7ec"
+model_bg = "#1e1e2e"
+
+context = "#fab387"
+context_bg = "#313244"
+
+cost = "#a6e3a1"
+cost_bg = "#45475a"
+```
+
+Preserve all other settings and avoid writing the whole file (it will mangle any nerd fonts).
 
 ## Step 7: Verify Installation
 
 Run a test to verify everything works:
 
 ```bash
-echo '{"model":{"display_name":"Sonnet 4"},"cost":{"total_cost_usd":0.05},"context_window":{"context_window_size":200000,"current_usage":{"input_tokens":10000,"cache_creation_input_tokens":0,"cache_read_input_tokens":0}}}' | ~/.local/bin/starship-claude --no-progress
+echo '{"model":{"display_name":"Opus 4.5"},"cost":{"total_cost_usd":0.05},"context_window":{"context_window_size":200000,"current_usage":{"input_tokens":10000,"cache_creation_input_tokens":0,"cache_read_input_tokens":0}}}' | ~/.local/bin/starship-claude --no-progress
 ```
 
 Show the output to the user.
@@ -201,19 +245,19 @@ Display this completion message:
 ```
 Setup complete!
 
-Your starship-claude statusline is now configured with:
-- Palette: {chosen_palette}
-- Style: {chosen_style or "minimal-text"}
-- Nerd Fonts: {yes/no based on has_nerd_fonts}
+You are now the proud owner of a starship powered statusline.
+
+TODO:
+1. Restart claude if you don't see the statusline.
+2. Run /starship at any time to reconfigure.
+3. Customize it by hand by editing ~/.claude/starship.toml
 
 Files created/updated:
 - ~/.local/bin/starship-claude (statusline script)
 - ~/.claude/starship.toml (starship config)
 - ~/.claude/settings.json (claude settings)
 
-To reconfigure later, run /starship again.
-
-You may need to restart Claude Code to see the changes.
+I hope you enjoy! Please let me know if you have any feedback!
 ```
 
 ## Template File Locations
@@ -222,10 +266,9 @@ The template files are located at `${CLAUDE_PLUGIN_ROOT}/templates/`:
 
 ```
 templates/
-├── minimal-text.toml    # Minimal style without nerd fonts (includes all palettes)
-├── minimal-nerd.toml    # Minimal style with nerd fonts (includes all palettes)
-├── bubbles-nerd.toml  # Bubbles style with nerd fonts (palettes appended by configure.sh)
-└── starship-claude      # Binary for generating statusline
+├── bubbles.toml       # Bubbles style with nerd fonts
+├── minimal-text.toml  # Minimal style without nerd fonts
+├── minimal-nerd.toml  # Minimal style with nerd fonts
+├── powerline.toml     # Powerline style with nerd fonts
+└── starship-claude    # Binary for generating statusline
 ```
-
-All palettes are embedded in the template files. The setup wizard replaces the `palette = "catppuccin_mocha"` line with the user's choice.

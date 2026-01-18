@@ -1,0 +1,20 @@
+# Nord
+[palettes.custom]
+claude = "#D97757"
+claude_bg = "#2e3440"
+
+directory = "#88c0d0"
+directory_bg = "#2e3440"
+
+git_branch = "#b48ead"
+git_status = "#bf616a"
+git_bg = "#3b4252"
+
+model = "#5e81ac"
+model_bg = "#2e3440"
+
+context = "#8fbcbb"
+context_bg = "#3b4252"
+
+cost = "#a3be8c"
+cost_bg = "#434c5e"

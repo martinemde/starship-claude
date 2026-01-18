@@ -7,7 +7,7 @@
 # Options:
 #   --nerdfont              Use nerd font symbols (default: text only)
 #   --palette PALETTE       Set color palette (catppuccin_mocha, catppuccin_frappe,
-#                           dracula, gruvbox_dark, nord, solarized_dark)
+#                           dracula, gruvbox_dark, nord, tokyonight)
 #   --style STYLE           Choose style: minimal or bubbles (default: minimal)
 #   --compare-styles        Show both minimal and bubbles styles
 #   --all-palettes          Show all 6 color palettes in current style
@@ -34,10 +34,10 @@ readonly TEMPLATE_DIR="${PLUGIN_ROOT}/templates"
 readonly STARSHIP_CLAUDE="${PLUGIN_ROOT}/bin/starship-claude"
 
 # Available themes
-readonly VALID_THEMES="catppuccin_mocha catppuccin_frappe dracula gruvbox_dark nord solarized_dark"
+readonly VALID_THEMES="catppuccin_mocha catppuccin_frappe dracula gruvbox_dark nord tokyonight"
 
 # Sample JSON for preview
-readonly SAMPLE_JSON='{"model":{"display_name":"Sonnet 4"},"cost":{"total_cost_usd":0.05},"context_window":{"context_window_size":200000,"current_usage":{"input_tokens":10000,"cache_creation_input_tokens":0,"cache_read_input_tokens":0}}}'
+readonly SAMPLE_JSON='{"model":{"display_name":"Opus 4.5"},"cost":{"total_cost_usd":0.05},"context_window":{"context_window_size":200000,"current_usage":{"input_tokens":10000,"cache_creation_input_tokens":0,"cache_read_input_tokens":0}}}'
 
 # Default values
 use_nerdfont=false
@@ -63,7 +63,7 @@ Options:
                             dracula
                             gruvbox_dark
                             nord
-                            solarized_dark
+                            tokyonight
   --style STYLE           Choose style: minimal (default) or bubbles
                           Note: bubbles style requires nerd fonts
   --compare-styles        Show both minimal and bubbles styles side by side
@@ -106,11 +106,11 @@ validate_style() {
   local style_to_check="$1"
 
   case "${style_to_check}" in
-  minimal | bubbles)
+  minimal | bubbles | powerline)
     return 0
     ;;
   *)
-    die "Invalid style '${style_to_check}'. Valid styles: minimal, bubbles"
+    die "Invalid style '${style_to_check}'. Valid styles: minimal, bubbles, powerline"
     ;;
   esac
 }
@@ -127,7 +127,10 @@ get_template_file() {
     fi
     ;;
   bubbles)
-    template_file="${TEMPLATE_DIR}/bubbles-nerd.toml"
+    template_file="${TEMPLATE_DIR}/bubbles.toml"
+    ;;
+  powerline)
+    template_file="${TEMPLATE_DIR}/powerline.toml"
     ;;
   esac
 
@@ -138,15 +141,15 @@ get_template_file() {
   printf '%s' "${template_file}"
 }
 
-extract_palettes() {
-  # Extract palette definitions from minimal-nerd.toml (starting from [palettes. line)
-  local palette_source="${TEMPLATE_DIR}/minimal-nerd.toml"
+get_palette_content() {
+  local palette_name="$1"
+  local palette_file="${TEMPLATE_DIR}/palettes/${palette_name}.toml"
 
-  if [[ ! -f "${palette_source}" ]]; then
-    die "Palette source not found: ${palette_source}"
+  if [[ ! -f "${palette_file}" ]]; then
+    die "Palette file not found: ${palette_file}"
   fi
 
-  sed -n '/^\[palettes\./,$p' "${palette_source}"
+  cat "${palette_file}"
 }
 
 create_temp_config() {
@@ -155,9 +158,11 @@ create_temp_config() {
 
   temp_file="$(mktemp)"
 
-  # Read template and replace the palette line with the chosen palette
-  sed "s/^palette = \"catppuccin_mocha\"/palette = \"${palette}\"/" \
-    "${template_file}" >"${temp_file}"
+  cat "${template_file}" >"${temp_file}"
+
+  # Append a blank line and the palette content
+  printf '\n' >>"${temp_file}"
+  get_palette_content "${palette}" >>"${temp_file}"
 
   printf '%s' "${temp_file}"
 }
@@ -275,16 +280,19 @@ run_single_preview_internal() {
 }
 
 run_compare_styles() {
-  printf 'MINIMAL:   '
+  printf 'Minimal:   '
   run_single_preview_internal "minimal" "${palette}"
   printf '\n'
-  printf 'POWERLINE: '
+  printf 'Bubbles:   '
   run_single_preview_internal "bubbles" "${palette}"
+  printf '\n'
+  printf 'Powerline: '
+  run_single_preview_internal "powerline" "${palette}"
   printf '\n'
 }
 
 run_all_palettes() {
-  local palettes=(catppuccin_mocha catppuccin_frappe dracula gruvbox_dark nord solarized_dark)
+  local palettes=(catppuccin_mocha catppuccin_frappe tokyonight nord dracula gruvbox_dark)
   local p
 
   for p in "${palettes[@]}"; do

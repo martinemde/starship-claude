@@ -1,6 +1,7 @@
 # Minimal Text Template
 "$schema" = "https://starship.rs/config-schema.json"
 
+palette = "custom"
 add_newline = false
 
 # dir git model context cost
@@ -12,225 +13,35 @@ ${env_var.CLAUDE_CONTEXT} \
 ${env_var.CLAUDE_COST}\
 """
 
-# Replace with the user's choice of palette
-palette = "catppuccin_mocha"
-
 [directory]
-style = "fg:sky"
+style = "fg:directory"
 format = "[$path]($style)"
 truncation_length = 2
 truncate_to_repo = true
 
 [git_branch]
-symbol = ""
-style = "fg:maroon"
+symbol = ""
+style = "fg:git_branch"
 format = "[$branch]($style)"
 
 [git_status]
-style = "fg:maroon"
+style = "fg:git_status"
 format = "[($all_status$ahead_behind)]($style)"
 
 [env_var.CLAUDE_MODEL]
 variable = "CLAUDE_MODEL"
 format = "[$env_value]($style)"
-style = "fg:sapphire"
+style = "fg:model"
 
 [env_var.CLAUDE_CONTEXT]
 variable = "CLAUDE_CONTEXT"
 format = "[$env_value]($style)"
-style = "fg:peach"
+style = "fg:context"
 
 [env_var.CLAUDE_COST]
 variable = "CLAUDE_COST"
 format = "[$env_value]($style)"
-style = "fg:green"
+style = "fg:cost"
 
-[palettes.catppuccin_frappe]
-rosewater = "#dc8a78"
-flamingo = "#dd7878"
-pink = "#ea76cb"
-mauve = "#8839ef"
-red = "#d20f39"
-maroon = "#e64553"
-peach = "#fe640b"
-yellow = "#df8e1d"
-green = "#40a02b"
-teal = "#179299"
-sky = "#04a5e5"
-sapphire = "#209fb5"
-blue = "#1e66f5"
-lavender = "#7287fd"
-text = "#4c4f69"
-subtext1 = "#5c5f77"
-subtext0 = "#6c6f85"
-overlay2 = "#7c7f93"
-overlay1 = "#8c8fa1"
-overlay0 = "#9ca0b0"
-surface2 = "#acb0be"
-surface1 = "#bcc0cc"
-surface0 = "#ccd0da"
-base = "#eff1f5"
-mantle = "#e6e9ef"
-crust = "#dce0e8"
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
-
-[palettes.dracula]
-# Background colors
-base = "#282a36"
-mantle = "#21222c"
-crust = "#191a21"
-surface0 = "#44475a"
-surface1 = "#4d4f68"
-surface2 = "#565976"
-
-# Foreground colors
-text = "#f8f8f2"
-subtext0 = "#bfbfbf"
-subtext1 = "#e6e6e6"
-overlay0 = "#6272a4"
-overlay1 = "#7480ad"
-overlay2 = "#868eb6"
-
-# Accent colors
-red = "#ff5555"
-maroon = "#ff6e6e"
-green = "#50fa7b"
-yellow = "#f1fa8c"
-blue = "#6272a4"
-sapphire = "#8be9fd"
-sky = "#8be9fd"
-teal = "#8be9fd"
-peach = "#ffb86c"
-mauve = "#bd93f9"
-pink = "#ff79c6"
-lavender = "#bd93f9"
-flamingo = "#ff79c6"
-rosewater = "#f8f8f2"
-
-[palettes.gruvbox_dark]
-# Background colors
-base = "#282828"
-mantle = "#1d2021"
-crust = "#1d2021"
-surface0 = "#3c3836"
-surface1 = "#504945"
-surface2 = "#665c54"
-
-# Foreground colors
-text = "#ebdbb2"
-subtext0 = "#a89984"
-subtext1 = "#bdae93"
-overlay0 = "#7c6f64"
-overlay1 = "#928374"
-overlay2 = "#a89984"
-
-# Accent colors
-red = "#cc241d"
-maroon = "#fb4934"
-green = "#98971a"
-yellow = "#d79921"
-blue = "#458588"
-sapphire = "#83a598"
-sky = "#83a598"
-teal = "#689d6a"
-peach = "#d65d0e"
-mauve = "#b16286"
-pink = "#d3869b"
-lavender = "#d3869b"
-flamingo = "#fb4934"
-rosewater = "#ebdbb2"
-
-[palettes.nord]
-# Polar Night (background)
-base = "#2e3440"
-mantle = "#3b4252"
-crust = "#2e3440"
-surface0 = "#3b4252"
-surface1 = "#434c5e"
-surface2 = "#4c566a"
-
-# Snow Storm (foreground)
-text = "#eceff4"
-subtext0 = "#d8dee9"
-subtext1 = "#e5e9f0"
-overlay0 = "#4c566a"
-overlay1 = "#616e88"
-overlay2 = "#7b88a1"
-
-# Frost (cool accents)
-blue = "#5e81ac"
-sapphire = "#88c0d0"
-sky = "#88c0d0"
-teal = "#8fbcbb"
-
-# Aurora (warm accents)
-red = "#bf616a"
-maroon = "#bf616a"
-green = "#a3be8c"
-yellow = "#ebcb8b"
-peach = "#d08770"
-mauve = "#b48ead"
-pink = "#b48ead"
-lavender = "#b48ead"
-flamingo = "#d08770"
-rosewater = "#eceff4"
-
-[palettes.solarized_dark]
-# Base colors
-base = "#002b36"
-mantle = "#073642"
-crust = "#002b36"
-surface0 = "#073642"
-surface1 = "#586e75"
-surface2 = "#657b83"
-
-# Content colors
-text = "#839496"
-subtext0 = "#93a1a1"
-subtext1 = "#eee8d5"
-overlay0 = "#586e75"
-overlay1 = "#657b83"
-overlay2 = "#839496"
-
-# Accent colors
-red = "#dc322f"
-maroon = "#cb4b16"
-green = "#859900"
-yellow = "#b58900"
-blue = "#268bd2"
-sapphire = "#2aa198"
-sky = "#2aa198"
-teal = "#2aa198"
-peach = "#cb4b16"
-mauve = "#6c71c4"
-pink = "#d33682"
-lavender = "#6c71c4"
-flamingo = "#d33682"
-rosewater = "#eee8d5"
+## Custom palette
+#

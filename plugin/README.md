@@ -4,19 +4,6 @@ A Claude Code plugin that provides an interactive setup wizard for configuring
 [starship-claude](https://github.com/martinemde/starship-claude) as your
 Claude Code statusline.
 
-## Features
-
-- **Interactive Setup**: Step-by-step wizard that guides you through configuration
-- **Nerd Font Detection**: Asks if you can see icons and adjusts accordingly
-- **Multiple Color Palettes**: Choose from 8 popular terminal themes
-  - Catppuccin (Mocha, Latte, Frappe, Macchiato)
-  - Gruvbox Dark
-  - Dracula
-  - Nord
-  - Solarized Dark
-- **Style Options**: Bubbles arrows or minimal clean text
-- **Automatic Installation**: Downloads the script, generates config, and updates settings
-
 ## Installation
 
 > [!TIP]
@@ -30,7 +17,7 @@ Claude Code statusline.
 /plugin install starship-claude@starship-claude
 ```
 
-Then run the setup wizard:
+Then run the setup wizard as many times as you want:
 
 ```claude
 /starship

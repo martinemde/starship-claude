@@ -1,0 +1,20 @@
+# Dracula
+[palettes.custom]
+claude = "#D97757"
+claude_bg = "#44475a"
+
+directory = "#8be9fd"
+directory_bg = "#282a36"
+
+git_branch = "#bd93f9"
+git_status = "#ff6e6e"
+git_bg = "#44475a"
+
+model = "#8be9fd"
+model_bg = "#282a36"
+
+context = "#ffb86c"
+context_bg = "#44475a"
+
+cost = "#50fa7b"
+cost_bg = "#4d4f68"

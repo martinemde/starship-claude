@@ -1,0 +1,20 @@
+# Gruvbox Dark
+[palettes.custom]
+claude = "#D97757"
+claude_bg = "#282828"
+
+directory = "#83a598"
+directory_bg = "#282828"
+
+git_branch = "#b16286"
+git_status = "#d3869b"
+git_bg = "#3c3836"
+
+model = "#458588"
+model_bg = "#282828"
+
+context = "#d79921"
+context_bg = "#3c3836"
+
+cost = "#689d6a"
+cost_bg = "#504945"

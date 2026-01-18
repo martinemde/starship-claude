@@ -58,9 +58,9 @@ PROGRESS_RED=60     # Error threshold for progress bar
 
 # Configuration: model display names
 # NerdFont icons used below which may not render (esp not on GitHub)
-HAIKU=" haiku"
-SONNET="󰚩 sonnet"
-OPUS="󱚦 opus"
+HAIKU_NERD=" "
+SONNET_NERD="󰚩 "
+OPUS_NERD="󱚦 "
 
 # The star can help visually differentiate from other prompts.
 # FYI: Official UI guidelines indicate #D97757 as Claude Orange
@@ -125,26 +125,14 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
     lower_model="$(printf '%s' "$raw_model" | tr '[:upper:]' '[:lower:]')"
 
     case "$lower_model" in
-    *haiku*) short_model="$HAIKU" ;;
-    *sonnet*) short_model="$SONNET" ;;
-    *opus*) short_model="$OPUS" ;;
-    *) short_model="$raw_model" ;;
+    *haiku*) model_nerd="$HAIKU_NERD" ;;
+    *sonnet*) model_nerd="$SONNET_NERD" ;;
+    *opus*) model_nerd="$OPUS_NERD" ;;
+    *) model_nerd="$SONNET_NERD" ;;
     esac
 
-    export CLAUDE_MODEL="$short_model"
-
-    # Extract version number for CLAUDE_MODEL_NAME
-    # Handles display_name format like "Sonnet 4.5"
-    version="$(
-      printf '%s' "$raw_model" |
-        sed -E 's/.*[^0-9]([0-9]+)\.([0-9]+).*/\1.\2/' |
-        grep -E '^[0-9]+\.[0-9]+$' || true
-    )"
-    if [ -n "$version" ]; then
-      export CLAUDE_MODEL_NAME="$short_model $version"
-    else
-      export CLAUDE_MODEL_NAME="$short_model"
-    fi
+    export CLAUDE_MODEL="$lower_model"
+    export CLAUDE_MODEL_NERD="$model_nerd$lower_model"
   fi
 
   #

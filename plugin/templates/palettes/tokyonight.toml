@@ -1,0 +1,46 @@
+# Tokyo Night (Night)
+[palettes.custom]
+# Default colors
+background = '#1a1b26'
+foreground = '#c0caf5'
+
+# Normal colors
+black = '#15161e'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+purple = '#bb9af7'
+cyan = '#7dcfff'
+white = '#a9b1d6'
+
+# Bright colors
+bright-black = '#414868'
+bright-red = '#ff899d'
+bright-green = '#9fe044'
+bright-yellow = '#faba4a'
+bright-blue = '#8db0ff'
+bright-purple = '#c7a9ff'
+bright-cyan = '#a4daff'
+bright-white = '#c0caf5'
+
+
+# Semantic colors for templates
+claude = "#090c0c"
+claude_bg = "#a3aed2"
+
+directory = "#e3e5e5"
+directory_bg = "#769ff0"
+
+git_branch = "#769ff0"
+git_status = "#769ff0"
+git_bg = "#394260"
+
+model = "#769ff0"
+model_bg = "#212736"
+
+context = "#a0a9cb"
+context_bg = "#1d2230"
+
+cost = "#c0caf5"
+
