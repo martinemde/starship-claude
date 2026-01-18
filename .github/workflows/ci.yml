@@ -18,5 +18,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y bats
 
+      - name: Install starship
+        run: |
+          curl -sS https://starship.rs/install.sh | sh -s -- --yes
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
       - name: Run tests
         run: bats test/

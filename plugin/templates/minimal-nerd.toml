@@ -1,3 +1,4 @@
+# Minimal Nerd Template
 "$schema" = "https://starship.rs/config-schema.json"
 
 add_newline = false
@@ -15,18 +16,18 @@ ${env_var.CLAUDE_COST}\
 palette = "catppuccin_mocha"
 
 [directory]
-style = "bold cyan"
+style = "fg:sky"
 format = "[$path]($style)"
 truncation_length = 2
 truncate_to_repo = true
 
 [git_branch]
 symbol = ""
-style = "bold purple"
+style = "fg:maroon"
 format = "[$branch]($style)"
 
 [git_status]
-style = "bold red"
+style = "fg:maroon"
 format = "[($all_status$ahead_behind)]($style)"
 
 [env_var.CLAUDE_MODEL]

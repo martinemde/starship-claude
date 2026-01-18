@@ -13,7 +13,7 @@
 #   --all-palettes          Show all 6 color palettes in current style
 #   --config CONFIG         Forward config path to starship-claude
 #   --path PATH             Forward path to starship-claude
-#   --write FILE            Write generated config to the specified file
+#   --write [FILE]          Write generated config to FILE (default: ~/.claude/starship.toml)
 #   -h, --help              Show this help message
 #
 
@@ -26,8 +26,12 @@ set -o pipefail
 # Script location and derived paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly SCRIPT_DIR
-readonly TEMPLATE_DIR="${SCRIPT_DIR}/../templates"
-readonly STARSHIP_CLAUDE="${SCRIPT_DIR}/starship-claude"
+
+# Allow overriding plugin root for testing (default to parent of script dir)
+PLUGIN_ROOT="${STARSHIP_CLAUDE_PLUGIN_ROOT:-$(cd "${SCRIPT_DIR}/.." && pwd)}"
+readonly PLUGIN_ROOT
+readonly TEMPLATE_DIR="${PLUGIN_ROOT}/templates"
+readonly STARSHIP_CLAUDE="${PLUGIN_ROOT}/bin/starship-claude"
 
 # Available themes
 readonly VALID_THEMES="catppuccin_mocha catppuccin_frappe dracula gruvbox_dark nord solarized_dark"
@@ -67,7 +71,7 @@ Options:
   --all-palettes          Show all available color palettes in current style
   --config CONFIG         Forward config path to starship-claude
   --path PATH             Forward path to starship-claude
-  --write FILE            Write generated config to the specified file
+  --write [FILE]          Write generated config to FILE (default: ~/.claude/starship.toml)
   -h, --help              Show this help message
 
 Examples:
@@ -200,11 +204,14 @@ parse_args() {
       shift 2
       ;;
     --write)
-      if [[ -z "${2:-}" ]]; then
-        die "Option $1 requires an argument"
+      # Default to ~/.claude/starship.toml if no argument provided
+      if [[ -n "${2:-}" && ! "${2}" =~ ^-- ]]; then
+        write_file="$2"
+        shift 2
+      else
+        write_file="~/.claude/starship.toml"
+        shift
       fi
-      write_file="$2"
-      shift 2
       ;;
     --compare-styles)
       compare_styles=true
