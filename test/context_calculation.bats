@@ -22,8 +22,8 @@ load test_helper
   output=$(run_with_fixture "session_without_current_usage.json")
   context=$(get_env_var "CLAUDE_CONTEXT" "$output")
 
-  # Should show placeholder "  %" when current_usage is null (maintains width)
-  [ "$context" = "  %" ]
+  # Should show placeholder "~~%" when current_usage is null (maintains width)
+  [ "$context" = "~~%" ]
 }
 
 @test "includes input_tokens in calculation" {

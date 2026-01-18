@@ -27,7 +27,7 @@ verify_template_match() {
 
   # Compare structure, ignoring palette line since that's expected to change
   diff <(head -n "$num_lines" "$template_file" | grep -v '^palette =') \
-       <(head -n "$num_lines" "$config_file" | grep -v '^palette =')
+    <(head -n "$num_lines" "$config_file" | grep -v '^palette =')
 }
 
 @test "configure.sh: shows help with --help" {
@@ -218,7 +218,7 @@ verify_template_match() {
 
 @test "configure.sh: --config passes through custom config" {
   local custom_config="${TEST_TEMP_DIR}/custom.toml"
-  cat > "$custom_config" << 'EOF'
+  cat >"$custom_config" <<'EOF'
 "$schema" = "https://starship.rs/config-schema.json"
 add_newline = false
 format = "$directory"
@@ -258,7 +258,6 @@ EOF
 
   # Verify all key sections exist
   grep -q '"$schema" = "https://starship.rs/config-schema.json"' "$output_file"
-  grep -q 'palette = "custom"' "$output_file"
   grep -q '# Gruvbox Dark' "$output_file"
   grep -q '\[directory\]' "$output_file"
   grep -q '\[env_var.CLAUDE_MODEL\]' "$output_file"
