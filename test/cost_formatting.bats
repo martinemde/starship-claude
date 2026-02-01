@@ -3,11 +3,6 @@
 
 load test_helper
 
-@test "formats cost under one cent as '< \$0.01'" {
-  # Find a fixture with cost < 0.01
-  skip "Need to create fixture with cost < 0.01"
-}
-
 @test "formats low cost with two decimals" {
   output=$(run_with_fixture "low_cost_session.json")
   cost=$(get_env_var "CLAUDE_COST" "$output")

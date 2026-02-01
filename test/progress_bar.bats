@@ -50,8 +50,11 @@ extract_osc_progress() {
 }
 
 @test "high context (>= 60%) would show error state" {
-  # Need a fixture with >= 60% context
-  skip "Need fixture with >= 60% context"
+  output=$(run_with_fixture "context_65_percent.json")
+  percent_raw=$(get_env_var "CLAUDE_PERCENT_RAW" "$output")
+
+  # 65 >= 60, so would be error state (2)
+  [ "$percent_raw" -ge 60 ]
 }
 
 @test "progress bar scales context to 0-80% range" {
@@ -65,8 +68,11 @@ extract_osc_progress() {
 }
 
 @test "context at 80%+ would show full progress bar" {
-  # Need a fixture with >= 80% context
-  skip "Need fixture with >= 80% context"
+  output=$(run_with_fixture "context_85_percent.json")
+  percent_raw=$(get_env_var "CLAUDE_PERCENT_RAW" "$output")
+
+  # 85 >= 80, so progress bar would be at 100%
+  [ "$percent_raw" -ge 80 ]
 }
 
 @test "progress bar is not sent when current_usage is null" {
