@@ -25,6 +25,8 @@ Then run the setup wizard:
 /starship
 ```
 
+![starship-claude setup wizard screenshot](setupwizard.png)
+
 The wizard is just instructions to claude that will help with setup:
 
 1. Check if starship is installed (offers to install if missing)
@@ -97,7 +99,7 @@ Warning does not mean stop, but be aware of your context usage.
 > This doesn't work in tmux even if you are using Ghostty.
 > Let me know if you find a workaround.
 
-[dumb-zone]: https://www.youtube.com/watch?v=rmvDxxNubIg "YouTube: No Vibes Allowed: Solving Hard Problems in Complex Codebases – Dex Horthy, HumanLayer"
+[dumb-zone]: https://www.youtube.com/watch?v=rmvDxxNubIg 'YouTube: No Vibes Allowed: Solving Hard Problems in Complex Codebases – Dex Horthy, HumanLayer'
 
 ### Customize
 
