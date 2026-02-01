@@ -54,7 +54,7 @@ style = "bg:context_bg fg:context"
 
 [env_var.CLAUDE_COST]
 variable = "CLAUDE_COST"
-format = "[$env_value ]($style)"
+format = "[$env_value]($style)"
 style = "bg:cost_bg fg:cost"
 
 ## Custom palette
