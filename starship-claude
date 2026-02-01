@@ -7,7 +7,7 @@
 #
 # Formatted values (for display):
 # - `CLAUDE_MODEL` - Short model name with icon (haiku/sonnet/opus)
-# - `CLAUDE_MODEL_NAME` - Model with version (e.g., "󱚦 opus 4.5")
+# - `CLAUDE_MODEL_NERD` - Model with version (e.g., "󱚦 opus 4.5")
 # - `CLAUDE_CONTEXT` - Context window usage percentage (left-padded, e.g., "15%")
 # - `CLAUDE_COST` - Formatted session cost (e.g., "$0.71")
 # - `CLAUDE_SUMMARY` - Session summary extracted from transcript
@@ -239,6 +239,7 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
     esac
 
     export CLAUDE_MODEL="$short_model"
+    export CLAUDE_MODEL_NERD="$short_model"
 
     # Extract version number using bash regex (no sed/grep)
     if [[ "$raw_model" =~ ([0-9]+)\.([0-9]+) ]]; then

@@ -7,11 +7,11 @@
 #
 # Formatted values (for display):
 # - `CLAUDE_MODEL` - Short model name with icon (haiku/sonnet/opus)
-# - `CLAUDE_MODEL_NAME` - Model with version (e.g., "󱚦 opus 4.5")
+# - `CLAUDE_MODEL_NERD` - Model with version (e.g., "󱚦 opus 4.5")
 # - `CLAUDE_CONTEXT` - Context window usage percentage (left-padded, e.g., "15%")
 # - `CLAUDE_COST` - Formatted session cost (e.g., "$0.71")
 # - `CLAUDE_SUMMARY` - Session summary extracted from transcript
-# - `CLAUDE_STAR` - Random star character for prompt decoration
+# - `CLAUDE_STAR` - Star character for prompt decoration
 #
 # Raw values (direct from JSON):
 # - `CLAUDE_SESSION_ID` - Session UUID
@@ -177,14 +177,14 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
   # Only parse if jq produced output
   if [ -n "$jq_output" ]; then
     if command -v mapfile >/dev/null 2>&1; then
-      mapfile -t values <<< "$jq_output"
+      mapfile -t values <<<"$jq_output"
     else
       # Fallback for shells without mapfile (zsh, older bash)
       i=0
       while IFS= read -r line; do
         values[i]="$line"
         i=$((i + 1))
-      done <<< "$jq_output"
+      done <<<"$jq_output"
     fi
   fi
 
@@ -239,6 +239,7 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
     esac
 
     export CLAUDE_MODEL="$short_model"
+    export CLAUDE_MODEL_NERD="$short_model"
 
     # Extract version number using bash regex (no sed/grep)
     if [[ "$raw_model" =~ ([0-9]+)\.([0-9]+) ]]; then
@@ -265,10 +266,10 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
     summary="$(jq -rs '[.[] | select(.type == "summary")] | last | .summary // empty' "$transcript_path")"
     if [ -n "$summary" ]; then
       # Sanitize: replace newlines with spaces, collapse whitespace, trim
-      summary="${summary//$'\n'/ }"  # newlines to spaces
-      summary="${summary//  / }"     # collapse double spaces (basic)
-      summary="${summary# }"         # trim leading
-      summary="${summary% }"         # trim trailing
+      summary="${summary//$'\n'/ }" # newlines to spaces
+      summary="${summary//  / }"    # collapse double spaces (basic)
+      summary="${summary# }"        # trim leading
+      summary="${summary% }"        # trim trailing
       export CLAUDE_SUMMARY="$summary"
     fi
   fi
