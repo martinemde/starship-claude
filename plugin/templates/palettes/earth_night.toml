@@ -1,0 +1,46 @@
+# Earth Night
+[palettes.custom]
+# Default colors
+background = '#2a211a'
+foreground = '#e8dfd5'
+
+# Normal colors
+black = '#1a1310'
+red = '#c47a5a'
+green = '#8a9a6b'
+yellow = '#c4a882'
+blue = '#8a6e4e'
+purple = '#9a7b6a'
+cyan = '#7a9a8a'
+white = '#d4c8b8'
+
+# Bright colors
+bright-black = '#5c4333'
+bright-red = '#d49070'
+bright-green = '#9aaa7b'
+bright-yellow = '#d4b892'
+bright-blue = '#9a7e5e'
+bright-purple = '#aa8b7a'
+bright-cyan = '#8aaa9a'
+bright-white = '#e8dfd5'
+
+
+# Semantic colors for templates
+claude = "#090c0c"
+claude_bg = "#c4a882"
+
+directory = "#e8dfd5"
+directory_bg = "#8a6e4e"
+
+git_branch = "#c4a882"
+git_status = "#c4a882"
+git_bg = "#5c4333"
+
+model = "#c4a882"
+model_bg = "#3a2a1c"
+
+context = "#b8a898"
+context_bg = "#241a10"
+
+cost = "#e8dfd5"
+cost_bg = "#5c4333"
