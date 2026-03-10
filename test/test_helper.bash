@@ -34,6 +34,7 @@ printf "CLAUDE_CONTEXT=%s\n" "${CLAUDE_CONTEXT:-}"
 printf "CLAUDE_SUMMARY=%s\n" "${CLAUDE_SUMMARY:-}"
 printf "CLAUDE_CURRENT_TOKENS=%s\n" "${CLAUDE_CURRENT_TOKENS:-}"
 printf "CLAUDE_PERCENT_RAW=%s\n" "${CLAUDE_PERCENT_RAW:-}"
+printf "CLAUDE_WORKTREE=%s\n" "${CLAUDE_WORKTREE:-}"
 
 # Raw session/workspace values
 printf "CLAUDE_SESSION_ID=%s\n" "${CLAUDE_SESSION_ID:-}"

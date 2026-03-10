@@ -4,7 +4,8 @@ add_newline = false
 
 # Minimal style - clean and simple
 format = """
-$directory \
+$directory\
+${env_var.CLAUDE_WORKTREE} \
 $git_branch$git_status \
 ${env_var.CLAUDE_MODEL} \
 ${env_var.CLAUDE_CONTEXT} \
@@ -25,6 +26,11 @@ format = "[$branch]($style)"
 [git_status]
 style = "fg:maroon"
 format = "[($all_status$ahead_behind)]($style)"
+
+[env_var.CLAUDE_WORKTREE]
+variable = "CLAUDE_WORKTREE"
+format = "[ $env_value]($style)"
+style = "fg:yellow"
 
 [env_var.CLAUDE_MODEL]
 variable = "CLAUDE_MODEL"

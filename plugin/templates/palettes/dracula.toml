@@ -18,3 +18,5 @@ context_bg = "#44475a"
 
 cost = "#50fa7b"
 cost_bg = "#4d4f68"
+
+worktree = "#f1fa8c"

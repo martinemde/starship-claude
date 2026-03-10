@@ -9,6 +9,7 @@ format = """
 [](directory_bg)\
 ${env_var.CLAUDE_STAR}\
 $directory\
+${env_var.CLAUDE_WORKTREE}\
 [](fg:git_bg bg:directory_bg)\
 $git_branch\
 $git_status\
@@ -41,6 +42,11 @@ format = "[$symbol $branch]($style)"
 [git_status]
 style = "bg:git_bg fg:git_status"
 format = "[($all_status$ahead_behind)]($style)"
+
+[env_var.CLAUDE_WORKTREE]
+variable = "CLAUDE_WORKTREE"
+format = "[ $env_value]($style)"
+style = "bg:directory_bg fg:worktree"
 
 [env_var.CLAUDE_MODEL_NERD]
 variable = "CLAUDE_MODEL_NERD"

@@ -12,6 +12,7 @@
 # - `CLAUDE_COST` - Formatted session cost (e.g., "$0.71")
 # - `CLAUDE_SUMMARY` - Session summary extracted from transcript
 # - `CLAUDE_STAR` - Star character for prompt decoration
+# - `CLAUDE_WORKTREE` - Git worktree name (only set when in a worktree, cached)
 #
 # Raw values (direct from JSON):
 # - `CLAUDE_SESSION_ID` - Session UUID
@@ -296,6 +297,34 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
     fi
   else
     export CLAUDE_CONTEXT="  %"
+  fi
+
+  #
+  # Git worktree detection (cached to avoid repeated git calls per render)
+  #
+  _worktree_cache_dir="${TMPDIR:-/tmp}/starship-claude-cache"
+  mkdir -p "$_worktree_cache_dir" 2>/dev/null || true
+  _wt_cache_key="$(printf '%s' "$PWD" | cksum | cut -d' ' -f1)"
+  _wt_cache_file="$_worktree_cache_dir/wt_$_wt_cache_key"
+  _wt_cache_ttl=300  # 5 minutes
+
+  _wt_value=""
+  if [ -f "$_wt_cache_file" ] && \
+     [ "$(( $(date +%s) - $(stat -f%m "$_wt_cache_file" 2>/dev/null || stat -c%Y "$_wt_cache_file" 2>/dev/null || echo 0) ))" -lt "$_wt_cache_ttl" ]; then
+    _wt_value="$(cat "$_wt_cache_file")"
+  else
+    _git_dir="$(git rev-parse --git-dir 2>/dev/null || true)"
+    _git_common="$(git rev-parse --git-common-dir 2>/dev/null || true)"
+    if [ -n "$_git_dir" ] && [ -n "$_git_common" ] && [ "$_git_dir" != "$_git_common" ]; then
+      _wt_value="${PWD##*/}"
+    fi
+    printf '%s' "$_wt_value" > "$_wt_cache_file" 2>/dev/null || true
+  fi
+
+  if [ -n "$_wt_value" ]; then
+    export CLAUDE_WORKTREE="$_wt_value"
+  else
+    unset CLAUDE_WORKTREE 2>/dev/null || true
   fi
 fi
 
