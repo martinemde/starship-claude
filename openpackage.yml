@@ -1,0 +1,11 @@
+name: starship-claude
+version: 1.0.0
+description: Starship-claude statusline setup wizard with customizable palettes
+author: Martin Emde
+license: MIT
+
+includes:
+  - plugin/commands/**/*
+  - plugin/templates/**/*
+  - plugin/bin/**/*
+
