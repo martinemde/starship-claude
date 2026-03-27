@@ -56,7 +56,6 @@
 #
 # Options can be added to the above command:
 #   --config PATH      Use custom Starship config file location
-#   --path PATH        Override the path context for starship prompt
 #   --no-progress      Disable terminal context progress bar
 #
 # MIT License
@@ -90,18 +89,13 @@ PROGRESS_RED=60     # Error threshold for progress bar
 
 # Configuration: model display names
 # NerdFont icons used below which may not render (esp not on GitHub)
-HAIKU=" haiku"
-SONNET="󰚩 sonnet"
-OPUS="󱚦 opus"
-
-# The star can help visually differentiate from other prompts.
-# FYI: Official UI guidelines indicate #D97757 as Claude Orange
-export CLAUDE_STAR=""
+HAIKU_NERD=" "
+SONNET_NERD="󰚩 "
+OPUS_NERD="󱚦 "
 
 # Parse command line options
 show_progress=1
 starship_config=""
-starship_path=""
 while [ $# -gt 0 ]; do
   case "$1" in
   --no-progress)
@@ -114,14 +108,6 @@ while [ $# -gt 0 ]; do
       exit 1
     fi
     starship_config="$2"
-    shift 2
-    ;;
-  --path)
-    if [ $# -lt 2 ]; then
-      echo "Error: --path requires a path argument" >&2
-      exit 1
-    fi
-    starship_path="$2"
     shift 2
     ;;
   *)
@@ -232,21 +218,14 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
     fi
 
     case "$lower_model" in
-    *haiku*) short_model="$HAIKU" ;;
-    *sonnet*) short_model="$SONNET" ;;
-    *opus*) short_model="$OPUS" ;;
-    *) short_model="$raw_model" ;;
+    *haiku*) model_nerd="$HAIKU_NERD" ;;
+    *sonnet*) model_nerd="$SONNET_NERD" ;;
+    *opus*) model_nerd="$OPUS_NERD" ;;
+    *) model_nerd="$SONNET_NERD" ;;
     esac
 
-    export CLAUDE_MODEL="$short_model"
-    export CLAUDE_MODEL_NERD="$short_model"
-
-    # Extract version number using bash regex (no sed/grep)
-    if [[ "$raw_model" =~ ([0-9]+)\.([0-9]+) ]]; then
-      export CLAUDE_MODEL_NAME="$short_model ${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
-    else
-      export CLAUDE_MODEL_NAME="$short_model"
-    fi
+    export CLAUDE_MODEL="$lower_model"
+    export CLAUDE_MODEL_NERD="$model_nerd$lower_model"
   fi
 
   #
@@ -292,10 +271,11 @@ if command -v jq >/dev/null 2>&1 && [ -n "$payload" ]; then
       export CLAUDE_PERCENT_RAW="$percent_used"
       export CLAUDE_CONTEXT="$(printf '%3s' "${percent_used}%")"
     else
-      export CLAUDE_CONTEXT="  %"
+      # No token data yet - use placeholder to maintain consistent width
+      export CLAUDE_CONTEXT="~~%"
     fi
   else
-    export CLAUDE_CONTEXT="  %"
+    export CLAUDE_CONTEXT="~~%"
   fi
 fi
 
@@ -309,16 +289,10 @@ if [ -z "$starship_config" ]; then
   starship_config="$HOME/.claude/starship.toml"
 fi
 
-# Build starship prompt arguments
-starship_args="prompt"
-if [ -n "$starship_path" ]; then
-  starship_args="$starship_args --path $starship_path"
-fi
-
 # Force non-zsh-style output so we don't get %{%} markers
 STARSHIP_CONFIG="$starship_config" \
   STARSHIP_SHELL=sh \
-  $starship_cmd $starship_args
+  "$starship_cmd" prompt
 
 # Terminal progress bar (OSC 9;4) - sent AFTER starship to avoid render conflicts
 # Can be disabled via --no-progress flag

@@ -7,9 +7,9 @@ load test_helper
 # Returns the state and progress values
 extract_osc_progress() {
   local output="$1"
-  # Look for ESC ] 9 ; 4 ; <state> ; <progress> BEL
-  # In the output, ESC is \033 or ^[
-  echo "$output" | grep -o $'\033\]9;4;[0-9];[0-9]*\a' | sed 's/.*9;4;\([0-9]\);\([0-9]*\).*/\1 \2/'
+  # Look for ESC ] 9 ; 4 ; <state> ; <progress> ST
+  # ST (String Terminator) is ESC \ (\033\)
+  echo "$output" | grep -o $'\033\]9;4;[0-9];[0-9]*\033\\\\' | sed 's/.*9;4;\([0-9]\);\([0-9]*\).*/\1 \2/'
 }
 
 @test "progress bar is enabled by default" {

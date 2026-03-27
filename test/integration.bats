@@ -123,5 +123,5 @@ load test_helper
   # Test without context (null current_usage) - shows placeholder
   output=$(run_with_fixture "session_without_current_usage.json")
   context=$(get_env_var "CLAUDE_CONTEXT" "$output")
-  [ "$context" = "  %" ]
+  [ "$context" = "~~%" ]
 }
