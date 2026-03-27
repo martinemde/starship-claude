@@ -270,5 +270,4 @@ templates/
 ├── minimal-text.toml  # Minimal style without nerd fonts
 ├── minimal-nerd.toml  # Minimal style with nerd fonts
 ├── powerline.toml     # Powerline style with nerd fonts
-└── starship-claude    # Binary for generating statusline
 ```

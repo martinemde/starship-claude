@@ -9,7 +9,7 @@
 PROJECT_ROOT="$(cd "${BATS_TEST_DIRNAME}/.." && pwd)"
 
 # Paths
-BIN_DIR="${PROJECT_ROOT}"
+BIN_DIR="${PROJECT_ROOT}/plugin/bin"
 FIXTURES_DIR="${PROJECT_ROOT}/test/fixtures"
 
 # Test helpers
@@ -190,7 +190,7 @@ GOLDEN_DIR="${PROJECT_ROOT}/test/golden"
 CONFIGURE_SCRIPT="${PROJECT_ROOT}/plugin/bin/configure.sh"
 
 # starship-claude binary
-STARSHIP_CLAUDE_BIN="${PROJECT_ROOT}/starship-claude"
+STARSHIP_CLAUDE_BIN="${PROJECT_ROOT}/plugin/bin/starship-claude"
 
 # Helper to run configure.sh with arguments
 # Usage: run_configure [--style STYLE] [--palette PALETTE] [--nerdfont] [--write FILE]

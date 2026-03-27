@@ -41,6 +41,9 @@
 # - `CLAUDE_CURRENT_TOKENS` - Sum of input + cache tokens (for context %)
 # - `CLAUDE_PERCENT_RAW` - Raw percentage number (no padding)
 #
+# Automatically detects terminal width from the parent process TTY and passes
+# it to starship, enabling $fill and right-aligned segments to work correctly.
+#
 # Also prints OSC 9;4 ConEmu terminal progress bar for context usage (optional)
 #
 # Repository: https://github.com/martinemde/starship-claude
@@ -347,10 +350,29 @@ if [ -z "$starship_config" ]; then
   starship_config="$HOME/.claude/starship.toml"
 fi
 
+# Detect real terminal width via parent process TTY
+# The statusline subprocess doesn't have a real TTY, so starship defaults to
+# 80 columns. This breaks $fill and right-aligned segments. We detect the
+# actual width from the parent process's TTY and pass it to starship with -w.
+term_width=""
+parent_tty="$(ps -o tty= -p "$(ps -o ppid= -p $$)" 2>/dev/null | tr -d ' ')" || true
+if [ -n "$parent_tty" ] && [ "$parent_tty" != "??" ] && [ "$parent_tty" != "?" ]; then
+  w="$(stty size < "/dev/$parent_tty" 2>/dev/null | awk '{print $2}')" || true
+  if [ -n "$w" ] && [ "$w" -gt 0 ] 2>/dev/null; then
+    term_width=$((w - 6))
+  fi
+fi
+
+# Build starship prompt arguments
+starship_args="prompt"
+if [ -n "$term_width" ]; then
+  starship_args="$starship_args -w $term_width"
+fi
+
 # Force non-zsh-style output so we don't get %{%} markers
 STARSHIP_CONFIG="$starship_config" \
   STARSHIP_SHELL=sh \
-  "$starship_cmd" prompt
+  $starship_cmd $starship_args
 
 # Terminal progress bar (OSC 9;4) - sent AFTER starship to avoid render conflicts
 # Can be disabled via --no-progress flag

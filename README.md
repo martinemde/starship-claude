@@ -79,7 +79,7 @@ Add the statusline in your Claude Code settings (`~/.claude/settings.json`):
 Run it directly to test it out but you'll need to grab a [test fixture JSON file](https://raw.githubusercontent.com/martinemde/starship-claude/refs/heads/main/test/fixtures/low_cost_session.json).
 
 ```sh
-./starship-claude < test/fixtures/low_cost_session.json
+./plugin/bin/starship-claude < test/fixtures/low_cost_session.json
 ```
 
 ## My Favorite Feature: Context Window Progress Bar
