@@ -6,6 +6,10 @@
 
 _Use [Starship](https://starship.rs) for your [`claude` code](https://claude.ai/products/claude-code) status line._
 
+Make the Claude Code statusline json available to starship's modular configuration system.
+This project aims to leave starship customization to the user.
+Have claude design palettes and styles, or add your own custom modules to the statusline.
+
 ## Quick Start
 
 > [!TIP]
@@ -48,8 +52,6 @@ curl -sS https://starship.rs/install.sh | sh
 
 ```
 
-You'll probably want a [Nerd Font](https://www.nerdfonts.com/) (optional) for the robot icons.
-
 When you're ready to install, run these in your terminal (not in claude):
 
 ```bash
@@ -76,11 +78,20 @@ Add the statusline in your Claude Code settings (`~/.claude/settings.json`):
 }
 ```
 
-Run it directly to test it out but you'll need to grab a [test fixture JSON file](https://raw.githubusercontent.com/martinemde/starship-claude/refs/heads/main/test/fixtures/low_cost_session.json).
+Run it directly to test it out with a [test fixture JSON file](https://raw.githubusercontent.com/martinemde/starship-claude/refs/heads/main/test/fixtures/low_cost_session.json).
 
 ```sh
 ./plugin/bin/starship-claude < test/fixtures/low_cost_session.json
 ```
+
+### Nerd Fonts
+
+You may want to (optionally) download and configure your terminal to use a
+[Nerd Font](https://www.nerdfonts.com/) if the special characters don't show.
+
+Be warned that Claude Code struggles to work with many of the powerline glyphs, so claude may
+regularly erase them when working with the toml. I haven't found a great solution to this. Try
+telling claude to edit with `sed` or not to touch the nerd fonts (like when setting the palette).
 
 ## My Favorite Feature: Context Window Progress Bar
 
@@ -99,9 +110,9 @@ Warning does not mean stop, but be aware of your context usage.
 > This doesn't work in tmux even if you are using Ghostty.
 > Let me know if you find a workaround.
 
-[dumb-zone]: https://www.youtube.com/watch?v=rmvDxxNubIg 'YouTube: No Vibes Allowed: Solving Hard Problems in Complex Codebases – Dex Horthy, HumanLayer'
+[dumb-zone]: https://www.youtube.com/watch?v=rmvDxxNubIg "YouTube: No Vibes Allowed: Solving Hard Problems in Complex Codebases – Dex Horthy, HumanLayer"
 
-### Customize
+## Customize
 
 Add these options to the `~/.claude/settings.json` if you want do things differently.
 
@@ -113,14 +124,13 @@ starship-claude --config ~/.config/starship/claude.toml
 starship-claude --no-progress
 ```
 
-### Running Tests
+## Running Tests
 
-Install BATS and run tests:
+Install BATS and run tests (example using mise):
 
 ```bash
 # Install BATS via mise
 mise use bats@latest
-mise install
 
 # Run all tests
 mise exec -- bats test/
