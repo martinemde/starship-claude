@@ -19,6 +19,10 @@ _Use [Starship](https://starship.rs) for your [`claude` code](https://claude.ai/
 /plugin install starship-claude@starship-claude
 ```
 
+```claude
+/reload-plugins
+```
+
 Then run the setup wizard:
 
 ```claude
